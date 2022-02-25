@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="HelloBt"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\usr\;CMake Files\..\..\usr\lib\;CMake Files\..\..\usr\lib\arm-linux-gnueabihf\;CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\;CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5\;CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5Core\;CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5Bluetooth\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/tmp/tmp.hcciyFIcfe/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/tmp/tmp.hcciyFIcfe/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="HelloBt">
+				<Option output="/tmp/tmp.hcciyFIcfe/cmake-build-debug/HelloBt" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.hcciyFIcfe/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_BLUETOOTH_LIB"/>
+					<Add directory="/tmp/tmp.hcciyFIcfe/cmake-build-debug/HelloBt_autogen/include"/>
+					<Add directory="/usr/include/arm-linux-gnueabihf/qt5"/>
+					<Add directory="/usr/include/arm-linux-gnueabihf/qt5/QtCore"/>
+					<Add directory="/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/arm-linux-gnueabihf/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/arm-linux-gnueabihf/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/arm-linux-gnueabihf/8/include-fixed"/>
+					<Add directory="/usr/include/arm-linux-gnueabihf"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 HelloBt"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="HelloBt/fast">
+				<Option output="/tmp/tmp.hcciyFIcfe/cmake-build-debug/HelloBt" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.hcciyFIcfe/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_BLUETOOTH_LIB"/>
+					<Add directory="/tmp/tmp.hcciyFIcfe/cmake-build-debug/HelloBt_autogen/include"/>
+					<Add directory="/usr/include/arm-linux-gnueabihf/qt5"/>
+					<Add directory="/usr/include/arm-linux-gnueabihf/qt5/QtCore"/>
+					<Add directory="/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++"/>
+					<Add directory="/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth"/>
+					<Add directory="/usr/include/c++/8"/>
+					<Add directory="/usr/include/arm-linux-gnueabihf/c++/8"/>
+					<Add directory="/usr/include/c++/8/backward"/>
+					<Add directory="/usr/lib/gcc/arm-linux-gnueabihf/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/arm-linux-gnueabihf/8/include-fixed"/>
+					<Add directory="/usr/include/arm-linux-gnueabihf"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 HelloBt/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/tmp/tmp.hcciyFIcfe/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="HelloBt_autogen">
+				<Option working_dir="/tmp/tmp.hcciyFIcfe/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 HelloBt_autogen"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/tmp/tmp.hcciyFIcfe/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/cmake-build-debug/HelloBt_autogen/mocs_compilation.cpp">
+			<Option target="HelloBt"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/main.cpp">
+			<Option target="HelloBt"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/../../usr/lib/arm-linux-gnueabihf/cmake/Qt5/Qt5Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/../../usr/lib/arm-linux-gnueabihf/cmake/Qt5/Qt5ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/../../usr/lib/arm-linux-gnueabihf/cmake/Qt5/Qt5ModuleLocation.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/../../usr/lib/arm-linux-gnueabihf/cmake/Qt5Core/Qt5CoreConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/../../usr/lib/arm-linux-gnueabihf/cmake/Qt5Core/Qt5CoreConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/../../usr/lib/arm-linux-gnueabihf/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/../../usr/lib/arm-linux-gnueabihf/cmake/Qt5Core/Qt5CoreConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/../../usr/lib/arm-linux-gnueabihf/cmake/Qt5Core/Qt5CoreMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/../../usr/lib/arm-linux-gnueabihf/cmake/Qt5Bluetooth/Qt5BluetoothConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5Bluetooth\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.hcciyFIcfe/../../usr/lib/arm-linux-gnueabihf/cmake/Qt5Bluetooth/Qt5BluetoothConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\arm-linux-gnueabihf\cmake\Qt5Bluetooth\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

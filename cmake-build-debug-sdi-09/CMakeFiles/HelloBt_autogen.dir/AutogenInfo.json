@@ -1,0 +1,71 @@
+{
+	"BUILD_DIR" : "/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/HelloBt_autogen",
+	"CMAKE_BINARY_DIR" : "/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09",
+	"CMAKE_CURRENT_BINARY_DIR" : "/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/tmp/tmp.hcciyFIcfe",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_SOURCE_DIR" : "/tmp/tmp.hcciyFIcfe",
+	"HEADERS" : 
+	[
+		[ "/tmp/tmp.hcciyFIcfe/Thingy.h", "Mu", "EWIEGA46WW/moc_Thingy.cpp" ],
+		[
+			"/tmp/tmp.hcciyFIcfe/thingyController.h",
+			"Mu",
+			"EWIEGA46WW/moc_thingyController.cpp"
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/HelloBt_autogen/include",
+	"MOC_COMPILATION_FILE" : "/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/HelloBt_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [ "QT_BLUETOOTH_LIB", "QT_CORE_LIB" ],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/usr/include/arm-linux-gnueabihf/qt5",
+		"/usr/include/arm-linux-gnueabihf/qt5/QtCore",
+		"/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++",
+		"/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth",
+		"/usr/include/c++/8",
+		"/usr/include/arm-linux-gnueabihf/c++/8",
+		"/usr/include/c++/8/backward",
+		"/usr/lib/gcc/arm-linux-gnueabihf/8/include",
+		"/usr/local/include",
+		"/usr/lib/gcc/arm-linux-gnueabihf/8/include-fixed",
+		"/usr/include/arm-linux-gnueabihf",
+		"/usr/include"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : true,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake-3.16/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/HelloBt_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 1,
+	"PARSE_CACHE_FILE" : "/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/CMakeFiles/HelloBt_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 5,
+	"SETTINGS_FILE" : "/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/CMakeFiles/HelloBt_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[ "/tmp/tmp.hcciyFIcfe/Thingy.cpp", "Mu" ],
+		[ "/tmp/tmp.hcciyFIcfe/main.cpp", "Mu" ],
+		[ "/tmp/tmp.hcciyFIcfe/thingyController.cpp", "Mu" ]
+	],
+	"VERBOSITY" : 0
+}

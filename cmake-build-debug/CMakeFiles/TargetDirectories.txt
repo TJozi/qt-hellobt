@@ -1,0 +1,4 @@
+/tmp/tmp.hcciyFIcfe/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/tmp/tmp.hcciyFIcfe/cmake-build-debug/CMakeFiles/HelloBt.dir
+/tmp/tmp.hcciyFIcfe/cmake-build-debug/CMakeFiles/edit_cache.dir
+/tmp/tmp.hcciyFIcfe/cmake-build-debug/CMakeFiles/HelloBt_autogen.dir

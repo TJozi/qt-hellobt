@@ -1,30 +1,36 @@
 #include <QCoreApplication>
-#include <QList>
 #include <QBluetoothDeviceInfo>
-#include <QBluetoothDeviceDiscoveryAgent>
-#include <QEventLoop>
 #include <QtDebug>
 #include <QBluetoothUuid>
+#include <cstdio>
+#include <QThread>
+#include <QLowEnergyController>
+#include "thingyController.h"
+
 
 static const QBluetoothUuid ThingyServiceUuid(QStringLiteral("ef680100-9b35-4933-9b10-52ffa9740042"));
+static const QBluetoothUuid ThingyUiService(QStringLiteral("ef680300-9b35-4933-9b10-52ffa9740042"));
+static const QBluetoothUuid ThingyButtonState(QStringLiteral("ef680302-9b35-4933-9b10-52ffa9740042"));
+static const QBluetoothUuid ThingyRgb(QStringLiteral("ef680301-9b35-4933-9b10-52ffa9740042"));
 
-QList<QBluetoothDeviceInfo> discoverDevices() {
-    QBluetoothDeviceDiscoveryAgent agent;
-    QEventLoop loop;
-    QList<QBluetoothDeviceInfo> devices;
+QList<QBluetoothDeviceInfo> thingies;
+QLowEnergyController *lec = nullptr;
+QList<QBluetoothUuid> services;
+QLowEnergyService *uis = nullptr;
+QLowEnergyCharacteristic led;
+QLowEnergyCharacteristic button;
 
-    QObject::connect(&agent, SIGNAL(finished()), &loop, SLOT(quit()));
-    agent.start();
-    loop.exec();
-    for (auto device: agent.discoveredDevices())
-        if (device.serviceUuids().contains(ThingyServiceUuid))
-            devices << device;
-    return devices;
-}
+QList<QBluetoothAddress> address;
+
 
 int main(int argc, char** argv) {
     	QCoreApplication application(argc, argv);
 
-    for (auto device: discoverDevices())
-        qDebug() << device.name() << device.address() << device.rssi();
+    thingyController::getInstance()->initialize();
+
+    puts("Starting...");
+
+    thingyController::getInstance()->connect();
+
+    QCoreApplication::exec();
 }

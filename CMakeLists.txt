@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(HelloBt)
 set(CMAKE_AUTOMOC ON)
 find_package(Qt5 COMPONENTS Core Bluetooth)
-add_executable(${PROJECT_NAME} main.cpp Thingy.cpp Thingy.h)
+add_executable(${PROJECT_NAME} main.cpp Thingy.cpp Thingy.h thingyController.cpp thingyController.h)
 target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Bluetooth)
 
 # Fixes "qt.bluetooth.bluez: Missing CAP_NET_ADMIN permission. Cannot determine whether a found address is of random or public type."

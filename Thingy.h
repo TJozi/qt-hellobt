@@ -1,8 +1,6 @@
 #ifndef HELLOBT_THINGY_H
 #define HELLOBT_THINGY_H
 
-
-
 #pragma once
 #include <QObject>
 #include <QBluetoothAddress>
@@ -14,14 +12,20 @@
 #include <QLowEnergyCharacteristic>
 #include <QByteArray>
 #include <functional>
+#include <QEventLoop>
+#include "thingyController.h"
+
+class thingyController;
 
 class Thingy : public QObject {
 Q_OBJECT
 public:
     enum State { Connecting, Discovering, Ready, Disconnected };
 
+    QEventLoop loop;
+
     static QList<QBluetoothDeviceInfo> discover(const QList<QBluetoothAddress>& addresses = QList<QBluetoothAddress>());
-    static void discoverInfinitely(std::function<void(const QBluetoothDeviceInfo& info)> deviceDiscoveredCallback);
+    //static void discoverInfinitely(std::function<void(const QBluetoothDeviceInfo& info)> deviceDiscoveredCallback);
     static Thingy* connect(const QBluetoothDeviceInfo& info, QObject* parent = nullptr);
     void disconnect();
 
@@ -47,6 +51,7 @@ private slots:
     void onCharacteristicChanged_(const QLowEnergyCharacteristic& characteristic, const QByteArray& value);
     void onDisconnected_();
 
+
 private:
     explicit Thingy(QObject* parent) : QObject(parent) {}
     static bool setNotify_(QLowEnergyService& service, const QLowEnergyCharacteristic& characteristic, bool enabled);
@@ -56,12 +61,16 @@ private:
     QLowEnergyController* controller_ = nullptr;
     QLowEnergyService* uiService_ = nullptr;
 
+    QLowEnergyCharacteristic button;
+    QLowEnergyCharacteristic led;
+
+
     static const QBluetoothUuid ThingyServiceUuid_;
     static const QBluetoothUuid UiServiceUuid_;
     static const QBluetoothUuid UiLedCharacteristicUuid_;
     static const QBluetoothUuid UiButtonCharacteristicUuid_;
 
-};
 
+};
 
 #endif //HELLOBT_THINGY_H
