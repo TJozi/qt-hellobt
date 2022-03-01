@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/tmp/tmp.hcciyFIcfe/Thingy.cpp
+QEventLoop
+-
+QBluetoothDeviceDiscoveryAgent
+-
+Thingy.h
+/tmp/tmp.hcciyFIcfe/Thingy.h
+
 /tmp/tmp.hcciyFIcfe/Thingy.h
 QObject
 -
@@ -29,29 +37,17 @@ functional
 -
 QEventLoop
 -
+thingyController.h
+/tmp/tmp.hcciyFIcfe/thingyController.h
 
-/tmp/tmp.hcciyFIcfe/main.cpp
-QCoreApplication
+/tmp/tmp.hcciyFIcfe/thingyController.h
+QString
 -
-QList
+QBluetoothAddress
 -
 QBluetoothDeviceInfo
 -
-QBluetoothDeviceDiscoveryAgent
--
-QEventLoop
--
-QtDebug
--
-QBluetoothUuid
--
-cstdio
--
-unistd.h
--
-QThread
--
-QLowEnergyController
+QList
 -
 Thingy.h
 /tmp/tmp.hcciyFIcfe/Thingy.h
@@ -200,10 +196,6 @@ QtBluetooth/qtbluetooth-config.h
 qbytearray.h
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/qbytearray.h
 
-/usr/include/arm-linux-gnueabihf/qt5/QtCore/QCoreApplication
-qcoreapplication.h
-/usr/include/arm-linux-gnueabihf/qt5/QtCore/qcoreapplication.h
-
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/QDebug
 qdebug.h
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/qdebug.h
@@ -232,10 +224,6 @@ qsharedpointer.h
 qstring.h
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/qstring.h
 
-/usr/include/arm-linux-gnueabihf/qt5/QtCore/QThread
-qthread.h
-/usr/include/arm-linux-gnueabihf/qt5/QtCore/qthread.h
-
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/QUuid
 quuid.h
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/quuid.h
@@ -243,10 +231,6 @@ quuid.h
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/QVariantMap
 qvariant.h
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/qvariant.h
-
-/usr/include/arm-linux-gnueabihf/qt5/QtCore/QtDebug
-qdebug.h
-/usr/include/arm-linux-gnueabihf/qt5/QtCore/qdebug.h
 
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/QtGlobal
 qglobal.h
@@ -342,20 +326,6 @@ QtCore/qatomic.h
 limits.h
 -
 new
--
-
-/usr/include/arm-linux-gnueabihf/qt5/QtCore/qcoreapplication.h
-QtCore/qglobal.h
--
-QtCore/qstring.h
--
-QtCore/qobject.h
--
-QtCore/qcoreevent.h
--
-QtCore/qeventloop.h
--
-QtCore/qscopedpointer.h
 -
 
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/qcoreevent.h
@@ -806,16 +776,6 @@ QtCore/qlocale.h
 QtCore/qscopedpointer.h
 -
 stdio.h
--
-
-/usr/include/arm-linux-gnueabihf/qt5/QtCore/qthread.h
-QtCore/qobject.h
--
-future
--
-functional
--
-limits.h
 -
 
 /usr/include/arm-linux-gnueabihf/qt5/QtCore/qtypeinfo.h

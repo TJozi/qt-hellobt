@@ -25,6 +25,10 @@ void thingyController::initialize(){
     address.push_front((QBluetoothAddress)addressThingy2);
 }
 
+void thingyController::initMqtt(QMqttClient* c){
+    client = c;
+}
+
 void thingyController::connect(){
     thingies = Thingy::discover(address);
 

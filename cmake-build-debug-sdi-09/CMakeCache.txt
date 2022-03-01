@@ -238,6 +238,12 @@ Qt5Bluetooth_DIR:PATH=/usr/lib/arm-linux-gnueabihf/cmake/Qt5Bluetooth
 //The directory containing a CMake configuration file for Qt5Core.
 Qt5Core_DIR:PATH=/usr/lib/arm-linux-gnueabihf/cmake/Qt5Core
 
+//The directory containing a CMake configuration file for Qt5Mqtt.
+Qt5Mqtt_DIR:PATH=/usr/lib/arm-linux-gnueabihf/cmake/Qt5Mqtt
+
+//The directory containing a CMake configuration file for Qt5Network.
+Qt5Network_DIR:PATH=/usr/lib/arm-linux-gnueabihf/cmake/Qt5Network
+
 //The directory containing a CMake configuration file for Qt5.
 Qt5_DIR:PATH=/usr/lib/arm-linux-gnueabihf/cmake/Qt5
 

@@ -125,6 +125,8 @@ HelloBt: CMakeFiles/HelloBt.dir/Thingy.cpp.o
 HelloBt: CMakeFiles/HelloBt.dir/thingyController.cpp.o
 HelloBt: CMakeFiles/HelloBt.dir/build.make
 HelloBt: /usr/lib/arm-linux-gnueabihf/libQt5Bluetooth.so.5.11.3
+HelloBt: /usr/lib/arm-linux-gnueabihf/libQt5Mqtt.so.5.11.3
+HelloBt: /usr/lib/arm-linux-gnueabihf/libQt5Network.so.5.11.3
 HelloBt: /usr/lib/arm-linux-gnueabihf/libQt5Core.so.5.11.3
 HelloBt: CMakeFiles/HelloBt.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable HelloBt"

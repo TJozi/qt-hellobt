@@ -1,0 +1,12 @@
+{
+  "broker": {
+    "host": "sdi.hevs.ch",
+    "port": 1883,
+    "username": "sdi09",
+    "password": "18681422d3fc90fcb3bed30757aebb3f"
+  },
+  "thingies": [
+    "FD:17:0C:19:6A:F7",
+    "D5:2F:7E:30:10:5A"
+  ]
+}

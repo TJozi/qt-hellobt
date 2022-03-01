@@ -4,7 +4,9 @@
 CMakeFiles/HelloBt.dir/HelloBt_autogen/mocs_compilation.cpp.o
  /tmp/tmp.hcciyFIcfe/Thingy.h
  /tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/HelloBt_autogen/EWIEGA46WW/moc_Thingy.cpp
+ /tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/HelloBt_autogen/EWIEGA46WW/moc_thingyController.cpp
  /tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/HelloBt_autogen/mocs_compilation.cpp
+ /tmp/tmp.hcciyFIcfe/thingyController.h
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothAddress
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothDeviceInfo
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothUuid
@@ -103,6 +105,7 @@ CMakeFiles/HelloBt.dir/HelloBt_autogen/mocs_compilation.cpp.o
 CMakeFiles/HelloBt.dir/Thingy.cpp.o
  /tmp/tmp.hcciyFIcfe/Thingy.cpp
  /tmp/tmp.hcciyFIcfe/Thingy.h
+ /tmp/tmp.hcciyFIcfe/thingyController.h
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothAddress
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothDeviceDiscoveryAgent
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothDeviceInfo
@@ -203,8 +206,8 @@ CMakeFiles/HelloBt.dir/Thingy.cpp.o
 CMakeFiles/HelloBt.dir/main.cpp.o
  /tmp/tmp.hcciyFIcfe/Thingy.h
  /tmp/tmp.hcciyFIcfe/main.cpp
+ /tmp/tmp.hcciyFIcfe/thingyController.h
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothAddress
- /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothDeviceDiscoveryAgent
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothDeviceInfo
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothUuid
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QLowEnergyAdvertisingData
@@ -214,7 +217,6 @@ CMakeFiles/HelloBt.dir/main.cpp.o
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QLowEnergyService
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qbluetooth.h
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qbluetoothaddress.h
- /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qbluetoothdevicediscoveryagent.h
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qbluetoothdeviceinfo.h
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qbluetoothuuid.h
  /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qlowenergyadvertisingdata.h
@@ -254,6 +256,107 @@ CMakeFiles/HelloBt.dir/main.cpp.o
  /usr/include/arm-linux-gnueabihf/qt5/QtCore/qcontainerfwd.h
  /usr/include/arm-linux-gnueabihf/qt5/QtCore/qcontiguouscache.h
  /usr/include/arm-linux-gnueabihf/qt5/QtCore/qcoreapplication.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qcoreevent.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qdebug.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qeventloop.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qflags.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qgenericatomic.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qglobal.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qglobalstatic.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qhash.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qhashfunctions.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qiodevice.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qiterator.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qlist.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qlocale.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qlogging.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qmap.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qmetatype.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qmutex.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qnamespace.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qnumeric.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qobject.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qobject_impl.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qobjectdefs.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qobjectdefs_impl.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qpair.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qpoint.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qprocessordetection.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qrefcount.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qregexp.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qscopedpointer.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qset.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qshareddata.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qsharedpointer.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qsharedpointer_impl.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qstring.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qstringalgorithms.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qstringbuilder.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qstringlist.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qstringliteral.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qstringmatcher.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qstringview.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qsysinfo.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qsystemdetection.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qtcore-config.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qtextstream.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qthread.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qtypeinfo.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/quuid.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qvariant.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qvarlengtharray.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qvector.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qversiontagging.h
+CMakeFiles/HelloBt.dir/thingyController.cpp.o
+ /tmp/tmp.hcciyFIcfe/Thingy.h
+ /tmp/tmp.hcciyFIcfe/thingyController.cpp
+ /tmp/tmp.hcciyFIcfe/thingyController.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothAddress
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothDeviceInfo
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QBluetoothUuid
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QLowEnergyAdvertisingData
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QLowEnergyCharacteristic
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QLowEnergyController
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QLowEnergyDescriptor
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/QLowEnergyService
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qbluetooth.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qbluetoothaddress.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qbluetoothdeviceinfo.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qbluetoothuuid.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qlowenergyadvertisingdata.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qlowenergycharacteristic.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qlowenergycontroller.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qlowenergydescriptor.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qlowenergyservice.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qtbluetooth-config.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtBluetooth/qtbluetoothglobal.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QByteArray
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QDebug
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QEventLoop
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QList
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QMetaType
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QObject
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QSharedPointer
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QString
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QThread
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QUuid
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QVariantMap
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/QtGlobal
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qalgorithms.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qarraydata.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qatomic.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qatomic_bootstrap.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qatomic_cxx11.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qatomic_msvc.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qbasicatomic.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qbytearray.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qbytearraylist.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qchar.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qcompilerdetection.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qconfig-bootstrapped.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qconfig.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qcontainerfwd.h
+ /usr/include/arm-linux-gnueabihf/qt5/QtCore/qcontiguouscache.h
  /usr/include/arm-linux-gnueabihf/qt5/QtCore/qcoreevent.h
  /usr/include/arm-linux-gnueabihf/qt5/QtCore/qdebug.h
  /usr/include/arm-linux-gnueabihf/qt5/QtCore/qeventloop.h

@@ -17,7 +17,7 @@
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/HelloBt_autogen/include",
 	"MOC_COMPILATION_FILE" : "/tmp/tmp.hcciyFIcfe/cmake-build-debug-sdi-09/HelloBt_autogen/mocs_compilation.cpp",
-	"MOC_DEFINITIONS" : [ "QT_BLUETOOTH_LIB", "QT_CORE_LIB" ],
+	"MOC_DEFINITIONS" : [ "QT_BLUETOOTH_LIB", "QT_CORE_LIB", "QT_MQTT_LIB", "QT_NETWORK_LIB" ],
 	"MOC_DEPEND_FILTERS" : 
 	[
 		[
@@ -31,6 +31,8 @@
 		"/usr/include/arm-linux-gnueabihf/qt5/QtCore",
 		"/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++",
 		"/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth",
+		"/usr/include/arm-linux-gnueabihf/qt5/QtNetwork",
+		"/usr/include/arm-linux-gnueabihf/qt5/QtMqtt",
 		"/usr/include/c++/8",
 		"/usr/include/arm-linux-gnueabihf/c++/8",
 		"/usr/include/c++/8/backward",

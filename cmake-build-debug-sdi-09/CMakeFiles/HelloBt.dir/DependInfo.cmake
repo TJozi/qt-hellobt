@@ -15,6 +15,8 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_TARGET_DEFINITIONS_CXX
   "QT_BLUETOOTH_LIB"
   "QT_CORE_LIB"
+  "QT_MQTT_LIB"
+  "QT_NETWORK_LIB"
   )
 
 # The include file search paths:
@@ -24,6 +26,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/arm-linux-gnueabihf/qt5/QtCore"
   "/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++"
   "/usr/include/arm-linux-gnueabihf/qt5/QtBluetooth"
+  "/usr/include/arm-linux-gnueabihf/qt5/QtNetwork"
+  "/usr/include/arm-linux-gnueabihf/qt5/QtMqtt"
   )
 
 # Targets to which this target links.
