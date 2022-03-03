@@ -11,6 +11,7 @@
 #include <QBluetoothDeviceInfo>
 #include <QList>
 #include "Thingy.h"
+#include <QtCore>
 #include <QtMqtt>
 
 class Thingy;
@@ -23,9 +24,8 @@ public:
     void initialize();
     void connect();
     void notifyButtonPressed(Thingy* thingy);
-    void initMqtt(QMqttClient* c);
 
-    QMqttClient* client;
+    QMqttClient client;
     QList<QBluetoothDeviceInfo> thingies;
     QList<Thingy*> connectedDevices;
     QList<QBluetoothAddress> address;

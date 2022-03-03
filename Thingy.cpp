@@ -114,7 +114,7 @@ void Thingy::onCharacteristicChanged_(const QLowEnergyCharacteristic& characteri
     qDebug() << "Characteristic has changed. Value: " << value;
 
     if(characteristic == button){
-        emit buttonStateChanged(true);
+        emit buttonStateChanged(*value);
     }
 
 }

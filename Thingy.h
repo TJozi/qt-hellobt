@@ -14,6 +14,7 @@
 #include <functional>
 #include <QEventLoop>
 #include "thingyController.h"
+#include <QtMqtt>
 
 class thingyController;
 
