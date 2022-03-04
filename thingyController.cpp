@@ -36,15 +36,27 @@ void thingyController::initialize(){
     client.connectToHost();
 
     QObject::connect(&client, &QMqttClient::connected, [&]() {
+        //client.publish(QMqttTopicName("sdi09/hello/status"), "online", 0, true);
         client.publish(QMqttTopicName("sdi09/hello/status"), "online", 0, true);
         client.subscribe(QMqttTopicFilter("sdi09/hello/text"));
+        client.subscribe(QMqttTopicFilter("sdi09/+/led"));
     });
 
     QObject::connect(&client, &QMqttClient::messageReceived,
                      [&](const QByteArray& message, const QMqttTopicName& topic) {
                          qDebug() << "Received message:" << topic.name();
                          qDebug() << message;
-                         client.publish(QMqttTopicName("sdi09/hello/TEXT"), message.toUpper());
+                         //client.publish(QMqttTopicName("sdi09/hello/TEXT"), message.toUpper());
+
+                         auto json = QJsonDocument::fromJson(message);
+                         auto object = json.object();
+                         QStringList address = topic.name().split("/");
+
+
+                         qDebug() << address;
+
+                         setColorOnMessage(object["red"].toInt(), object["green"].toInt(), object["blue"].toInt(), (QBluetoothAddress)address.at(1));
+
                      });
 }
 
@@ -83,4 +95,11 @@ void thingyController::onButtonChanged(bool value){
         }
     }else
         client.publish(QMqttTopicName("sdi09/" + t->address().toString() + "/button"),"false");
+}
+
+void thingyController::setColorOnMessage(int red, int green, int blue, QBluetoothAddress addr) {
+    for(auto d : connectedDevices) {
+        if (d->address() == addr)
+            d->setLedColor(red, green, blue);
+    }
 }

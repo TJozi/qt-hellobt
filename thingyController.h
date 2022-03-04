@@ -39,6 +39,7 @@ private:
     thingyController();
 
     static thingyController* instance;
+    void setColorOnMessage(int red, int green, int blue, QBluetoothAddress addr);
 };
 
 
