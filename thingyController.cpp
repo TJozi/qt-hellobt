@@ -15,7 +15,7 @@ thingyController* thingyController::getInstance(){
     if(instance == 0){
         instance = new thingyController;
     }
-    return instance;
+   return instance;
 }
 
 
@@ -24,22 +24,39 @@ void thingyController::initialize(){
     address.push_front((QBluetoothAddress)addressThingy1);
     address.push_front((QBluetoothAddress)addressThingy2);
 
+    QFile jsonFile("../sdi-config.json");
+    jsonFile.open(QIODevice::ReadOnly);
+    auto jsonData = jsonFile.readAll();
+    auto json = QJsonDocument::fromJson(jsonData);
 
-    client.setHostname("vlesdi.hevs.ch");
-    client.setPort(1883);
+    if(json.isObject())
+    {
+        auto object = json.object();
+        auto broker = object["broker"].toObject();
+        host = broker["host"].toString();
+        port = broker["port"].toDouble();
+        username = broker["username"].toString();
+        password = broker["password"].toString();
+    }
+
+    appStatus.insert("connected",QJsonValue(false));
+    appStatus.insert("thingies",QJsonArray());
+
+    client.setHostname("vle" + host);
+    client.setPort(port);
     client.setCleanSession(true);
-    client.setUsername("sdi09");
-    client.setPassword(QCryptographicHash::hash("sdi09", QCryptographicHash::Md5).toHex());
-    client.setWillTopic("sdi09/hello/status");
+    client.setUsername(username);
+    client.setPassword(password);
+    client.setWillTopic(username + "/hello/status");
     client.setWillMessage("offline");
     client.setWillRetain(true);
     client.connectToHost();
 
     QObject::connect(&client, &QMqttClient::connected, [&]() {
-        //client.publish(QMqttTopicName("sdi09/hello/status"), "online", 0, true);
-        client.publish(QMqttTopicName("sdi09/hello/status"), "online", 0, true);
-        client.subscribe(QMqttTopicFilter("sdi09/hello/text"));
-        client.subscribe(QMqttTopicFilter("sdi09/+/led"));
+        appStatus["connected"] = QJsonValue(true);
+        client.publish(QMqttTopicName(username + "/hello/status"), QJsonDocument(appStatus).toJson(), 0, true);
+        //client.subscribe(QMqttTopicFilter(username + "/hello/text"));
+        client.subscribe(QMqttTopicFilter(username + "/+/led"));
     });
 
     QObject::connect(&client, &QMqttClient::messageReceived,

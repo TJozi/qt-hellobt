@@ -26,6 +26,13 @@ public:
     void notifyButtonPressed(Thingy* thingy);
 
     QMqttClient client;
+    QString host;
+    double port;
+    QString username;
+    QString password;
+
+    QJsonObject appStatus;
+
     QList<QBluetoothDeviceInfo> thingies;
     QList<Thingy*> connectedDevices;
     QList<QBluetoothAddress> address;
