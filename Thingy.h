@@ -23,10 +23,7 @@ Q_OBJECT
 public:
     enum State { Connecting, Discovering, Ready, Disconnected };
 
-    QEventLoop loop;
-
     static QList<QBluetoothDeviceInfo> discover(const QList<QBluetoothAddress>& addresses = QList<QBluetoothAddress>());
-    //static void discoverInfinitely(std::function<void(const QBluetoothDeviceInfo& info)> deviceDiscoveredCallback);
     static Thingy* connect(const QBluetoothDeviceInfo& info, QObject* parent = nullptr);
     void disconnect();
 
@@ -70,8 +67,6 @@ private:
     static const QBluetoothUuid UiServiceUuid_;
     static const QBluetoothUuid UiLedCharacteristicUuid_;
     static const QBluetoothUuid UiButtonCharacteristicUuid_;
-
-
 };
 
 #endif //HELLOBT_THINGY_H

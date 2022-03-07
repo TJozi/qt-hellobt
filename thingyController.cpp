@@ -7,9 +7,8 @@
 
 thingyController* thingyController::instance = 0;
 
-thingyController::thingyController(){
+thingyController::thingyController(){}
 
-}
 thingyController* thingyController::getInstance(){
     static thingyController theController;
     if(instance == 0){
@@ -18,12 +17,14 @@ thingyController* thingyController::getInstance(){
    return instance;
 }
 
-
 void thingyController::initialize(){
     emptyBluetoothCache();
-    address.push_front((QBluetoothAddress)addressThingy1);
-    address.push_front((QBluetoothAddress)addressThingy2);
+    //The addresses of our devices
+    //address.push_front((QBluetoothAddress)addressThingy1);
+    //address.push_front((QBluetoothAddress)addressThingy2);
 
+
+    //Opens and reads the json file for mqtt broker
     QFile jsonFile("../sdi-config.json");
     jsonFile.open(QIODevice::ReadOnly);
     auto jsonData = jsonFile.readAll();
@@ -37,8 +38,16 @@ void thingyController::initialize(){
         port = broker["port"].toDouble();
         username = broker["username"].toString();
         password = broker["password"].toString();
+        addrList = object["thingies"].toArray();
+    }
+    //Adds the addresses directly from the json file
+    for(auto l :addrList){
+        address.push_front((QBluetoothAddress)l.toString());
     }
 
+
+
+    //Status of the connection
     appStatus.insert("connected",QJsonValue(false));
     appStatus.insert("thingies",QJsonArray());
 
@@ -48,14 +57,13 @@ void thingyController::initialize(){
     client.setUsername(username);
     client.setPassword(password);
     client.setWillTopic(username + "/hello/status");
-    client.setWillMessage("offline");
+    client.setWillMessage(QJsonDocument(appStatus).toJson());
     client.setWillRetain(true);
     client.connectToHost();
 
     QObject::connect(&client, &QMqttClient::connected, [&]() {
         appStatus["connected"] = QJsonValue(true);
         client.publish(QMqttTopicName(username + "/hello/status"), QJsonDocument(appStatus).toJson(), 0, true);
-        //client.subscribe(QMqttTopicFilter(username + "/hello/text"));
         client.subscribe(QMqttTopicFilter(username + "/+/led"));
     });
 
@@ -63,29 +71,38 @@ void thingyController::initialize(){
                      [&](const QByteArray& message, const QMqttTopicName& topic) {
                          qDebug() << "Received message:" << topic.name();
                          qDebug() << message;
-                         //client.publish(QMqttTopicName("sdi09/hello/TEXT"), message.toUpper());
 
                          auto json = QJsonDocument::fromJson(message);
                          auto object = json.object();
-                         QStringList address = topic.name().split("/");
+                         QStringList splitTopic = topic.name().split("/");
 
-
-                         qDebug() << address;
-
-                         setColorOnMessage(object["red"].toInt(), object["green"].toInt(), object["blue"].toInt(), (QBluetoothAddress)address.at(1));
-
+                         if(splitTopic.at(2) == "led" && address.contains((QBluetoothAddress)splitTopic.at(1)))
+                            setColorOnMessage(object["red"].toInt(), object["green"].toInt(), object["blue"].toInt(), (QBluetoothAddress)splitTopic.at(1));
                      });
 }
 
-
+//Establishes the connection
 void thingyController::connect(){
-    thingies = Thingy::discover(address);
 
+    //Does discovering until all devices are connected
+    while(true){
+        thingies = Thingy::discover(address);
 
+        if(thingies.count() == addrList.count())
+            break;
+    }
+
+    //Connects thingies
     for(auto t: thingies){
         connectedDevices.append(Thingy::connect(t));
-       // connectedDevices << Thingy::connect(t);
     }
+
+    //Updates the status on the broker with the connected devices' addresses
+    for(auto d : connectedDevices) {
+        statusAddresses.append(d->address().toString());
+    }
+    appStatus["thingies"] = statusAddresses;
+    client.publish(QMqttTopicName(username + "/hello/status"), QJsonDocument(appStatus).toJson(), 0, true);
 }
 
 void thingyController::emptyBluetoothCache()
@@ -94,26 +111,25 @@ void thingyController::emptyBluetoothCache()
     QThread::msleep(1000);
 }
 
-void thingyController::notifyButtonPressed(Thingy* thingy){
-
-}
+//The button's state has changed
 void thingyController::onButtonChanged(bool value){
     qDebug() << "Button press notified to controller";
     auto* t=qobject_cast<Thingy*>(sender());
 
     if(value){
-        client.publish(QMqttTopicName("sdi09/" + t->address().toString() + "/button"),"true");
+        client.publish(QMqttTopicName(username + "/" + t->address().toString() + "/button"),"true");    //Btn pressed
         qDebug() << "Turning on leds";
         for(auto d : connectedDevices) {
             if(d == t){
-                d->setLedColor(0,255,0);
+                d->setLedColor(0,255,0);        //Set led to green color
             }else
-                d->setLedColor(255, 0, 0);
+                d->setLedColor(255, 0, 0);      //Set led to red color
         }
     }else
-        client.publish(QMqttTopicName("sdi09/" + t->address().toString() + "/button"),"false");
+        client.publish(QMqttTopicName(username + "/" + t->address().toString() + "/button"),"false");   //Btn released
 }
 
+//Broker sets the led color
 void thingyController::setColorOnMessage(int red, int green, int blue, QBluetoothAddress addr) {
     for(auto d : connectedDevices) {
         if (d->address() == addr)

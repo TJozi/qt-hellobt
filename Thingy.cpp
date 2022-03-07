@@ -37,6 +37,7 @@ Thingy* Thingy::connect(const QBluetoothDeviceInfo& info, QObject* parent){
     if (thingy->controller_ != nullptr)
     {
         QObject::connect(thingy->controller_,SIGNAL(connected()),thingy,SLOT(onConnected_()));
+        QObject::connect(thingy->controller_,SIGNAL(disconnected()),thingy,SLOT(onDisconnected_()));
         thingy->controller_->setRemoteAddressType(QLowEnergyController::RandomAddress);
         thingy->controller_->connectToDevice();
 
@@ -91,7 +92,6 @@ void Thingy::onServiceDiscovered_(const QBluetoothUuid& newService){
         uiService_ = controller_->createServiceObject(newService);
         uiService_->discoverDetails();
         QObject::connect(uiService_,SIGNAL(stateChanged(QLowEnergyService::ServiceState)),this,SLOT(onServiceStateChanged_(QLowEnergyService::ServiceState)));
-
     }
 }
 
@@ -116,7 +116,6 @@ void Thingy::onCharacteristicChanged_(const QLowEnergyCharacteristic& characteri
     if(characteristic == button){
         emit buttonStateChanged(*value);
     }
-
 }
 
 void Thingy::onDisconnected_(){

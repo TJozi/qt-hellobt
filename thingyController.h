@@ -23,15 +23,16 @@ public:
     void emptyBluetoothCache();
     void initialize();
     void connect();
-    void notifyButtonPressed(Thingy* thingy);
 
     QMqttClient client;
     QString host;
     double port;
     QString username;
     QString password;
+    QJsonArray addrList;
 
     QJsonObject appStatus;
+    QJsonArray statusAddresses;
 
     QList<QBluetoothDeviceInfo> thingies;
     QList<Thingy*> connectedDevices;
@@ -48,6 +49,4 @@ private:
     static thingyController* instance;
     void setColorOnMessage(int red, int green, int blue, QBluetoothAddress addr);
 };
-
-
 #endif //HELLOBT_THINGYCONTROLLER_H
