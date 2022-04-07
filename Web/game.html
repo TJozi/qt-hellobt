@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My Game</title>
+
+        <link href="style.css" rel="stylesheet">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+        <script type="text/javascript" src="scripts/func.js"></script>
+        <script type="text/javascript" src="scripts/connect.js"></script>
+
+    </head>
+
+    <body>
+        <h1>My Game</h1>
+        <div class="square" id="sqr"></div><br>
+
+        <div class="changeColor">
+            <button name="changeColor" type="button" id="changeColor" onclick="btnPressed()">Change color of the led</button>
+        </div>
+    </body>
+</html>
