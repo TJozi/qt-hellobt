@@ -1,4 +1,4 @@
-var client = new Paho.MQTT.Client("mqtt-ws.sdi.hevs.ch", 80, "/ws", "rgubsdflkoihisohieg");
+var client = new Paho.MQTT.Client("mqtt-ws.sdi.hevs.ch", 80, "/ws", "sdi09");
 
 client.onConnectionLost = function (responseObject) {
     if (responseObject.errorCode !== 0) {

@@ -18,6 +18,9 @@ function processMessage(message)
     else if(message.destinationName == "sdi09/FD:17:0C:19:6A:F7/button")
         switchColor("rgb(235, 118, 113)");
 
+    if(message.destinationName == "sdi09/FD:17:0C:19:6A:F7/button" && message.payloadString == "true")
+        player.jump();
+
     if(message.payloadString == "false")
         switchColor('white');
 }
