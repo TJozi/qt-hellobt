@@ -1,9 +1,18 @@
+//import platform from './img/platform.png'
+
+var idle = new Image();
+idle.src = "./img/spriteStandLeft.png";
+
+
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 const gravity = 0.3;
+const maxDistance = 1000;
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let playerProgression = 0;
+
+canvas.width = 1024;
+canvas.height = 576;
 
 class Player {
     constructor(){
@@ -17,11 +26,18 @@ class Player {
             y : 0
         };
 
-        this.width = 20;
-        this.height = 35;
+        this.width = 50;
+        this.height = 150;
+        this.Image = idle;
+        this.frames = 0;
+        
     }
 
     update(){
+        this.frames++;
+        if(this.frames > 28)
+            this.frames = 0;
+
         this.position.y += this.velocity.y;
         this.position.x += this.velocity.x;
 
@@ -34,8 +50,16 @@ class Player {
     }
 
     draw(){
-        c.fillStyle = 'blue';
-        c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        c.drawImage(
+            this.Image,
+            177 * this.frames,
+            0,
+            177,
+            400,
+            this.position.x,
+            this.position.y,
+            this.width,
+            this.height);
     }
 
     jump(){
@@ -58,7 +82,8 @@ const keys = {
 
 function animation(){
     requestAnimationFrame(animation);
-    c.clearRect(0,0,canvas.width,canvas.height);
+    c.fillStyle = 'grey'
+    c.fillRect(0,0,canvas.width,canvas.height);
     player.update();
 
     if(keys.left.pressed && player.position.x >= 50)
@@ -69,15 +94,24 @@ function animation(){
         player.velocity.x = 0;
 
         if(keys.right.pressed){
-            //bouger tous le chenille vers la gauche
+            playerProgression += 5;
+            //bouger tout le chenille vers la gauche
         }
+        if(keys.left.pressed && playerProgression > 0){
+            playerProgression += -5;
+            //bouger tout le chenille vers la droite
+        }
+        console.log(playerProgression);
     }
-       
+    
+    if(playerProgression >= maxDistance){
+        console.log("Finish");
+    }
 }
 animation();
 
 addEventListener('keydown', ({code})=>{
-    console.log(code);
+    //console.log(code);
     switch(code){
         case 'KeyA':  keys.left.pressed = true;
             break;
@@ -94,7 +128,6 @@ addEventListener('keyup', ({code})=>{
             break;
         case 'KeyD':  keys.right.pressed = false;
             break;
-
     }
 })
 
