@@ -5,6 +5,7 @@ const maxDistance = 1000;
 const walkingSpeed = 8;
 const jumpingSpeed = 20;
 const backgroundSpeed = 3;
+const foregroundSpeed = 5;
 const blockWidth = 400;
 
 //---------------------------------------------------------------------------------------
@@ -25,11 +26,13 @@ jumpL.src = "./img/AlixJumpLeft.png";
 
 //Environment
 const ground = new Image();
-ground.src = "./img/platform.png";
+ground.src = "./img/block.png";
 const background = new Image();
-background.src = "./img/background.png";
+background.src = "./img/background2.png";
 const backgroundA = new Image();
 backgroundA.src = "./img/background1.png";
+const foreground = new Image();
+foreground.src = "./img/foreground.png";
 
 //---------------------------------------------------------------------------------------
 //Game information
@@ -53,7 +56,7 @@ canvas.height = 576;
 class Player {
     constructor(){
         this.position = {
-            x : 100,
+            x : 50,
             y : 100
         };
 
@@ -176,11 +179,26 @@ class Block {
     }
 }
 
+class foregroundObject {
+    constructor(){
+        this.position = {
+            x : 0,
+            y : 0
+        };
+        this.Image = foreground;
+        this.width = 400;
+        this.height = 45;   
+    }
+
+    draw(){
+        c.drawImage(this.Image, this.position.x, this.position.y);
+    }
+}
 class backgroundObject {
     constructor({x, y}, objType){
         this.position = {
             x,
-            y,
+            y
         };
         objType;
         switch(objType){
@@ -226,6 +244,7 @@ let backgroundObj = [
         y : 0  
     }, "back1")
 ];
+let fore = new foregroundObject();
 
 //---------------------------------------------------------------------------------------
 //Functions
@@ -244,6 +263,8 @@ function animation(){
         block.draw();
     });
     player.update();
+    fore.draw();
+
 
     //Control
     if(keys.left.pressed && player.position.x >= 50)
@@ -264,6 +285,8 @@ function animation(){
                 if(backgroundObject.Image == backgroundA)
                     backgroundObject.position.x += -backgroundSpeed;
             }); 
+
+            fore.position.x -= foregroundSpeed;
         }
 
         if(keys.left.pressed && playerProgression > 0){                    //Movement to the left
@@ -276,7 +299,9 @@ function animation(){
              backgroundObj.forEach(backgroundObject => {
                 if(backgroundObject.Image == backgroundA)
                     backgroundObject.position.x += backgroundSpeed;
-            }); 
+            });
+
+            fore.position.x += foregroundSpeed;
         }
         //console.log(playerProgression);
     }
@@ -294,8 +319,8 @@ function animation(){
 
     //Ground collision
     blocks.forEach(block => {
-        if((player.position.y + player.height) <= block.position.y && 
-            (player.position.y + player.height + player.velocity.y >= block.position.y) &&
+        if((player.position.y + player.height) <= block.position.y + 10 && 
+            (player.position.y + player.height + player.velocity.y >= block.position.y + 10) &&
             (player.position.x + player.width >= block.position.x) &&
             (player.position.x <= block.position.x + block.width)){
 
@@ -358,6 +383,7 @@ function reset(){
         }, "back1")
     ];
 
+    fore = new foregroundObject();
     playerProgression = 0;
 }
 
