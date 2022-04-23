@@ -1,11 +1,11 @@
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 const gravity = 1;
-const maxDistance = 1000;
+const maxDistance = 22500;
 const walkingSpeed = 8;
 const jumpingSpeed = 20;
-const backgroundSpeed = 3;
-const foregroundSpeed = 5;
+const backgroundSpeed = 5;
+const foregroundSpeed = 8;
 const blockWidth = 400;
 
 //---------------------------------------------------------------------------------------
@@ -33,6 +33,8 @@ const backgroundA = new Image();
 backgroundA.src = "./img/background1.png";
 const foreground = new Image();
 foreground.src = "./img/foreground.png";
+const plateform = new Image();
+plateform.src = "./img/plateform.png";
 
 //---------------------------------------------------------------------------------------
 //Game information
@@ -178,6 +180,21 @@ class Block {
         c.drawImage(this.Image, this.position.x, this.position.y, blockWidth, this.height);
     }
 }
+class Plateform {
+    constructor({x, y}){
+        this.position = {
+            x,
+            y
+        };
+        this.Image = plateform;
+        this.width = 200;
+        this.height = 45;
+    }
+
+    draw(){
+        c.drawImage(this.Image, this.position.x, this.position.y);
+    }
+}
 
 class foregroundObject {
     constructor(){
@@ -220,20 +237,238 @@ class backgroundObject {
 
 
 let player = new Player();
-let blocks = [
+let groundObj = [
     new Block({
-        x : 0,
+        x : -5,
         y : 545
     }),
     new Block({
-        x : blockWidth-1,
+        x : blockWidth-30,
         y : 545
     }),
     new Block({
-        x : blockWidth*2 + 100,
+        x : (blockWidth-30)*2,
         y : 545
-    })
+    }),
+    new Block({
+        x : (blockWidth-30)*3,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*4,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*5,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*6,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*7,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*8,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*9 + 600,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*10,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*11,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*12,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*13,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*14,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*15,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*16,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*17,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*18,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*24,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*25,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*26,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*27+350,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*35,
+        y : 545
+    }),
+
+    new Block({
+        x : (blockWidth-30)*41,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*42,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*43 + 250,
+        y : 530
+    }),
+    new Block({
+        x : (blockWidth-30)*44,
+        y : 530
+    }),
+    new Block({
+        x : (blockWidth-30)*53,
+        y : 530
+    }),
+    new Block({
+        x : (blockWidth-30)*54,
+        y : 530
+    }),
+    new Block({
+        x : (blockWidth-30)*55,
+        y : 530
+    }),
+    new Block({
+        x : (blockWidth-30)*56,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*58,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*59,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*60,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*61,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*62,
+        y : 545
+    }),
+    new Block({
+        x : (blockWidth-30)*63,
+        y : 545
+    }),
+
+    //-----------------------------------------------------------
+    //Floating plateforms
+    new Plateform({
+        x : (blockWidth-30)*8  ,
+        y : 350
+    }),
+    new Plateform({
+        x : (blockWidth-30)*8 + 400,
+        y : 200
+    }),
+    new Plateform({
+        x : (blockWidth-30)*20 - 60,
+        y : 500
+    }),
+    new Plateform({
+        x : (blockWidth-30)*21,
+        y : 400
+    }),
+    new Plateform({
+        x : (blockWidth-30)*22,
+        y : 300
+    }),
+    new Plateform({
+        x : (blockWidth-30)*23 + 200,
+        y : 350
+    }),
+    new Plateform({
+        x : (blockWidth-30)*29 + 200,
+        y : 340
+    }),
+    new Plateform({
+        x : (blockWidth-30)*31,
+        y : 270
+    }),
+    new Plateform({
+        x : (blockWidth-30)*32,
+        y : 180
+    }),
+    new Plateform({
+        x : (blockWidth-30)*33 + 200,
+        y : 300
+    }),
+    new Plateform({
+        x : (blockWidth-30)*36 + 350,
+        y : 500
+    }),
+    new Plateform({
+        x : (blockWidth-30)*38 + 200,
+        y : 500
+    }),
+    new Plateform({
+        x : (blockWidth-30)*39 + 200,
+        y : 454
+    }),
+    new Plateform({
+        x : (blockWidth-30)*46,
+        y : 500
+    }),
+    new Plateform({
+        x : (blockWidth-30)*47 + 150,
+        y : 500
+    }),
+    new Plateform({
+        x : (blockWidth-30)*49,
+        y : 420
+    }),
+    new Plateform({
+        x : (blockWidth-30)*50+100,
+        y : 350
+    }),
+    new Plateform({
+        x : (blockWidth-30)*52,
+        y : 260
+    }),
 ];
+
+
 let backgroundObj = [
     new backgroundObject({
         x : 0,
@@ -259,12 +494,12 @@ function animation(){
         backgroundObject.draw();
     });
 
-    blocks.forEach(block => {
+    groundObj.forEach(block => {
         block.draw();
     });
+
     player.update();
     fore.draw();
-
 
     //Control
     if(keys.left.pressed && player.position.x >= 50)
@@ -274,10 +509,10 @@ function animation(){
     else{
         player.velocity.x = 0;
 
-        if(keys.right.pressed){                                            //Movement to the right
+        if(keys.right.pressed && playerProgression < maxDistance){                                            //Movement to the right
             playerProgression += walkingSpeed;
 
-            blocks.forEach(block => {
+            groundObj.forEach(block => {
                 block.position.x += -walkingSpeed;
             });
 
@@ -292,7 +527,7 @@ function animation(){
         if(keys.left.pressed && playerProgression > 0){                    //Movement to the left
             playerProgression += -walkingSpeed;
 
-            blocks.forEach(block => {
+            groundObj.forEach(block => {
                 block.position.x += walkingSpeed;
             });
 
@@ -303,7 +538,7 @@ function animation(){
 
             fore.position.x += foregroundSpeed;
         }
-        //console.log(playerProgression);
+        console.log(playerProgression);
     }
     
 
@@ -318,15 +553,14 @@ function animation(){
     }
 
     //Ground collision
-    blocks.forEach(block => {
-        if((player.position.y + player.height) <= block.position.y + 10 && 
-            (player.position.y + player.height + player.velocity.y >= block.position.y + 10) &&
-            (player.position.x + player.width >= block.position.x) &&
-            (player.position.x <= block.position.x + block.width)){
+    groundObj.forEach(obj => {
+        if((player.position.y + player.height) <= obj.position.y + 25 && 
+            (player.position.y + player.height + player.velocity.y >= obj.position.y + 25) &&
+            (player.position.x + player.width >= obj.position.x) &&
+            (player.position.x <= obj.position.x + obj.width)){
 
             player.velocity.y = 0;
 
-            //console.log("current state " + player.currentState)
             //Animation when landing
             if(player.currentState == player.states.jump.right){
                 if(keys.right.pressed){
@@ -358,20 +592,234 @@ function animation(){
 
 function reset(){
     player = new Player();
-    blocks = [
+    groundObj = [
         new Block({
-            x : 0,
+            x : -5,
+            y : 545
+        }),
+        new Block({
+            x : blockWidth-30,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*2,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*3,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*4,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*5,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*6,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*7,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*8,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*9 + 600,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*10,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*11,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*12,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*13,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*14,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*15,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*16,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*17,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*18,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*24,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*25,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*26,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*27+350,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*35,
+            y : 545
+        }),
+    
+        new Block({
+            x : (blockWidth-30)*41,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*42,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*43 + 250,
             y : 530
         }),
         new Block({
-            x : blockWidth-1,
+            x : (blockWidth-30)*44,
             y : 530
         }),
         new Block({
-            x : blockWidth*2 + 100,
+            x : (blockWidth-30)*53,
             y : 530
+        }),
+        new Block({
+            x : (blockWidth-30)*54,
+            y : 530
+        }),
+        new Block({
+            x : (blockWidth-30)*55,
+            y : 530
+        }),
+        new Block({
+            x : (blockWidth-30)*56,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*58,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*59,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*60,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*61,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*62,
+            y : 545
+        }),
+        new Block({
+            x : (blockWidth-30)*63,
+            y : 545
+        }),
+        new Plateform({
+            x : (blockWidth-30)*8  ,
+            y : 350
+        }),
+        new Plateform({
+            x : (blockWidth-30)*8 + 400,
+            y : 200
+        }),
+        new Plateform({
+            x : (blockWidth-30)*20 - 60,
+            y : 500
+        }),
+        new Plateform({
+            x : (blockWidth-30)*21,
+            y : 400
+        }),
+        new Plateform({
+            x : (blockWidth-30)*22,
+            y : 300
+        }),
+        new Plateform({
+            x : (blockWidth-30)*23 + 200,
+            y : 350
+        }),
+        new Plateform({
+            x : (blockWidth-30)*29 + 200,
+            y : 340
+        }),
+        new Plateform({
+            x : (blockWidth-30)*31,
+            y : 270
+        }),
+        new Plateform({
+            x : (blockWidth-30)*32,
+            y : 180
+        }),
+        new Plateform({
+            x : (blockWidth-30)*33 + 200,
+            y : 300
+        }),
+        new Plateform({
+            x : (blockWidth-30)*36 + 350,
+            y : 500
+        }),
+        new Plateform({
+            x : (blockWidth-30)*38 + 200,
+            y : 500
+        }),
+        new Plateform({
+            x : (blockWidth-30)*39 + 200,
+            y : 454
+        }),
+        new Plateform({
+            x : (blockWidth-30)*46,
+            y : 500
+        }),
+        new Plateform({
+            x : (blockWidth-30)*47 + 150,
+            y : 500
+        }),
+        new Plateform({
+            x : (blockWidth-30)*49,
+            y : 420
+        }),
+        new Plateform({
+            x : (blockWidth-30)*50+100,
+            y : 350
+        }),
+        new Plateform({
+            x : (blockWidth-30)*52,
+            y : 260
         })
     ];
+    
     backgroundObj = [
         new backgroundObject({
             x : 0,
