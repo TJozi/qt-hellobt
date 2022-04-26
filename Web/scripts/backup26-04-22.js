@@ -39,7 +39,6 @@ plateform.src = "./img/plateform.png";
 //---------------------------------------------------------------------------------------
 //Game information
 let playerProgression = 0;
-let health = 4;
 
 const keys = {
     right : {
@@ -92,7 +91,7 @@ class Player {
                 right : 4,
                 left : 5,
                 crop : 341,
-                width : 220,        //Retirer 100px de la gauche sur le png
+                width : 220,
                 frames : 3
             }
         };
@@ -115,7 +114,9 @@ class Player {
                 break;
             case this.states.jump.left: this.Image = jumpL;
                 break;
+
         }
+
         //this.count++;
         //---------------------------------------------------------------------------------------------------
         //Tout faire avec la velocity.y plutôt que les touches. Ne garder qu'une frame du sprite?------------
@@ -162,21 +163,6 @@ class Player {
             this.update();
             //console.log("jumping");
         //}
-    }
-}
-
-class Pnj {
-    constructor({x, y}){
-        this.position = {
-            x,
-            y
-        };
-        this.Image = plateform;
-        this.width = 30;
-        this.height = 60;
-    }
-    draw(){
-        c.drawImage(this.Image, this.position.x, this.position.y, blockWidth, this.height);
     }
 }
 
@@ -252,10 +238,6 @@ class backgroundObject {
 
 
 let player = new Player();
-let goblins = [
-    new Pnj({x : 500, y : 500}),
-    new Pnj({x : 5000, y : 500})
-];
 let groundObj = [
     new Block({
         x : -5,
@@ -517,13 +499,13 @@ function animation(){
         block.draw();
     });
 
-    goblins.forEach(pnj => {
-        pnj.draw();
-    });
-
     player.update();
+    console.log("x = " + player.velocity.x);
+    console.log("y = " + player.velocity.y);
+   // console.log("Current frame cnt " + player.currentFrame);
     fore.draw();
-    drawHealth();
+
+    switchAnimation();
 
     //Control
     if(keys.left.pressed && player.position.x >= 50)
@@ -543,10 +525,7 @@ function animation(){
             backgroundObj.forEach(backgroundObject => {
                 if(backgroundObject.Image == backgroundA)
                     backgroundObject.position.x += -backgroundSpeed;
-            });
-            goblins.forEach(pnj => {
-                pnj.position.x -= walkingSpeed;
-            });
+            }); 
 
             fore.position.x -= foregroundSpeed;
         }
@@ -563,10 +542,6 @@ function animation(){
                     backgroundObject.position.x += backgroundSpeed;
             });
 
-            goblins.forEach(pnj => {
-                pnj.position.x += walkingSpeed;
-            });
-
             fore.position.x += foregroundSpeed;
         }
         console.log(playerProgression);
@@ -576,22 +551,12 @@ function animation(){
     //Win                                                                   //End of game
     if(playerProgression >= maxDistance){
         console.log("win");
-        //alert("YOU WIN, CONGRATULATIONS!");
-        //document.location.reload();
     }
     //Lose
     if(player.position.y > canvas.height){
         console.log("lose");
         reset();
     }
-
-    //Losing health
-    goblins.forEach(pnj => {
-        if((player.position.x + player.width/2) >= pnj.position.x && (player.position.x + player.width/2) < (pnj.position.x + pnj.width) &&
-        (player.position.y + player.height) >= pnj.position.y){
-            health--;
-        }
-    })
 
     //Ground collision
     groundObj.forEach(obj => {
@@ -603,7 +568,7 @@ function animation(){
             player.velocity.y = 0;
 
             //Animation when landing
-            if(player.currentState == player.states.jump.right){
+            /*if(player.currentState == player.states.jump.right){
                 if(keys.right.pressed){
                     player.currentState = player.states.run.right;
                     player.currentFrame = player.states.run.frames;
@@ -626,19 +591,13 @@ function animation(){
                     player.currentFrame = player.states.stand.frames;
                     player.width = player.states.stand.width;
                 }
-            }
+            }*/
         }
     });
-}
-function drawHealth() {
-    c.font = "16px Arial";
-    c.fillStyle = 'black';
-    c.fillText("Health: "+ health, 8, 20);
 }
 
 function reset(){
     player = new Player();
-    health = 4;
     groundObj = [
         new Block({
             x : -5,
@@ -882,6 +841,53 @@ function reset(){
     playerProgression = 0;
 }
 
+function switchAnimation(){
+    if(player.velocity.x == 0 && player.velocity.y == 0){                //Standing
+        if(player.currentState == player.states.run.right ||
+            player.currentState == player.states.jump.right ||
+            player.currentState == player.states.idle.right){
+                player.currentState = player.states.stand.right;
+            }else{
+                player.currentState = player.states.stand.left;
+            }
+            console.log("stand");
+    }else if(player.velocity.y  < 1){                                   //Jumping                   
+        if(player.velocity.x >= 0){
+            player.currentState = player.states.jump.right;
+        }else{
+            player.currentState = player.states.jump.left;
+        }
+        console.log("Jump");
+    }else{                                                              //Running
+        if(player.velocity.x > 0 || keys.right.pressed){
+            player.currentState = player.states.run.right;
+        }else if(player.velocity.x < 0){
+            player.currentState = player.states.run.left;
+        }
+        console.log("run");
+    }
+
+    switch(player.currentState){
+        case player.states.run.right:
+        case player.states.run.left:    player.currentFrame = player.states.run.frames;
+                                        player.currentWidth = player.states.run.crop;
+                                        player.width = player.states.run.width;
+            break;
+        case player.states.jump.right:
+        case player.states.jump.left:   player.currentFrame = player.states.jump.frames;
+                                        player.currentWidth = player.states.jump.crop;
+                                        player.width = player.states.jump.width;
+            break;
+        case player.states.stand.right:
+        case player.states.stand.left:  player.currentFrame = player.states.stand.frames;
+                                        player.currentWidth = player.states.stand.crop;
+                                        player.width = player.states.stand.width;
+            break;
+    }
+
+    console.log("current state" + player.currentState);
+}
+
 animation();
 
 //---------------------------------------------------------------------------------------
@@ -890,7 +896,7 @@ addEventListener('keydown', ({code})=>{
     //console.log(code);
     switch(code){
         case 'KeyA':    keys.left.pressed = true;
-                        if(player.velocity.y == 0){
+                        /* if(player.velocity.y == 0){
                             player.currentState = player.states.run.left;
                             player.currentFrame = player.states.run.frames;
                         }else{
@@ -898,12 +904,12 @@ addEventListener('keydown', ({code})=>{
                             player.currentFrame = player.states.jump.frames;
                         }
                         player.currentWidth = player.states.run.crop;
-                        player.width = player.states.run.width;
+                        player.width = player.states.run.width; */
                         //player.frames = 0;
                       
             break;
         case 'KeyD':    keys.right.pressed = true;
-                        if(player.velocity.y == 0){
+                        /* if(player.velocity.y == 0){
                             player.currentState = player.states.run.right;
                             player.currentFrame = player.states.run.frames;
                         }else{
@@ -911,11 +917,11 @@ addEventListener('keydown', ({code})=>{
                             player.currentFrame = player.states.jump.frames;
                         }
                         player.currentWidth = player.states.run.crop;
-                        player.width = player.states.run.width;
+                        player.width = player.states.run.width; */
                         // player.frames = 0;
             break;
         case 'Space':   player.jump();
-                        if(player.currentState == player.states.run.right || 
+                        /* if(player.currentState == player.states.run.right || 
                                player.currentState == player.states.stand.right ||
                                player.currentState == player.states.jump.right)
                             player.currentState = player.states.jump.right;
@@ -925,7 +931,7 @@ addEventListener('keydown', ({code})=>{
                         player.currentWidth = player.states.jump.crop;
                         player.currentFrame = player.states.jump.frames;
                         player.width = player.states.jump.width;
-                        player.frames = 0;
+                        player.frames = 0; */
             break;
     }
 })
@@ -933,20 +939,21 @@ addEventListener('keydown', ({code})=>{
 addEventListener('keyup', ({code})=>{
     switch(code){
         case 'KeyA':    keys.left.pressed = false;
-                        if(player.velocity.y == 0){
+                        /* if(player.velocity.y == 0){
                             player.currentState = player.states.stand.left;
                             player.currentWidth = player.states.stand.crop;
                             player.currentFrame = player.states.stand.frames;
                             player.width = player.states.stand.width;
-                        }
+                        } */
             break;
         case 'KeyD':    keys.right.pressed = false;
-                        if(player.velocity.y == 0){
+                        /* if(player.velocity.y == 0){
                             player.currentState = player.states.stand.right;
                             player.currentWidth = player.states.stand.crop;
                             player.currentFrame = player.states.stand.frames;
                             player.width = player.states.stand.width;
-                        }
+                        } */
             break;
     }
 })
+
