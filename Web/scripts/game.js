@@ -39,7 +39,7 @@ plateform.src = "./img/plateform.png";
 //---------------------------------------------------------------------------------------
 //Game information
 let playerProgression = 0;
-let health = 4;
+//let health = 4;
 
 const keys = {
     right : {
@@ -122,10 +122,15 @@ class Player {
         //--------------------------------------------------------------------------------------------------
         if(this.currentState == this.states.jump.right ||
             this.currentState == this.states.jump.left){
-                if((this.frames < this.currentFrame) && (this.velocity.y < 0)){
-                    this.frames++;  
+                if(this.velocity.y < 0){
+                    this.frames = 0;
+                }else if(this.velocity.y >= 0){
+                    this.frames = 3;
+                }
+               /*  if((this.frames < this.currentFrame) && (this.velocity.y < 0)){
+                    this.frames ++;  
                 }else if((this.frame) >= 0 && (this.velocity.y >= 0))
-                    this.frames--;
+                    this.frames--; */
         }else{
             this.frames++;
             if(this.frames > this.currentFrame)
@@ -171,12 +176,18 @@ class Pnj {
             x,
             y
         };
-        this.Image = plateform;
-        this.width = 30;
-        this.height = 60;
+        //this.Image = plateform;
+        this.alive = true;
+        this.width = 50;
+        this.height = 90;
     }
     draw(){
-        c.drawImage(this.Image, this.position.x, this.position.y, blockWidth, this.height);
+        if(this.alive){
+            //c.drawImage(this.Image, this.position.x, this.position.y, blockWidth, this.height);
+            c.fillStyle = 'red';
+            c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        }
+        
     }
 }
 
@@ -253,8 +264,14 @@ class backgroundObject {
 
 let player = new Player();
 let goblins = [
-    new Pnj({x : 500, y : 500}),
-    new Pnj({x : 5000, y : 500})
+    new Pnj({x : 2000, y : 500}),
+    new Pnj({x : 4500, y : 500}),
+    new Pnj({x : 6000, y : 500}),
+    new Pnj({x : 8000, y : 350}),
+    new Pnj({x : 9200, y : 500}),
+    new Pnj({x : 12000, y : 120}),
+    new Pnj({x : 19450, y : 200}),
+    new Pnj({x : 21000, y : 500})
 ];
 let groundObj = [
     new Block({
@@ -434,7 +451,7 @@ let groundObj = [
         y : 300
     }),
     new Plateform({
-        x : (blockWidth-30)*23 + 200,
+        x : (blockWidth-30)*23 + 70,
         y : 350
     }),
     new Plateform({
@@ -523,7 +540,7 @@ function animation(){
 
     player.update();
     fore.draw();
-    drawHealth();
+   // drawHealth();
 
     //Control
     if(keys.left.pressed && player.position.x >= 50)
@@ -585,12 +602,16 @@ function animation(){
         reset();
     }
 
-    //Losing health
+    //Losing health--------------dying
     goblins.forEach(pnj => {
-        if((player.position.x + player.width/2) >= pnj.position.x && (player.position.x + player.width/2) < (pnj.position.x + pnj.width) &&
-        (player.position.y + player.height) >= pnj.position.y){
-            health--;
+   //     oldContact = contact;
+        if(pnj.alive){                  //Is it alive?
+            if((player.position.x + player.width/2) >= pnj.position.x && (player.position.x + player.width/2) < (pnj.position.x + pnj.width) &&
+            (player.position.y + player.height) >= pnj.position.y){     //Is it in contact with the player?
+                reset();
+            }
         }
+        
     })
 
     //Ground collision
@@ -630,11 +651,11 @@ function animation(){
         }
     });
 }
-function drawHealth() {
+/* function drawHealth() {
     c.font = "16px Arial";
     c.fillStyle = 'black';
     c.fillText("Health: "+ health, 8, 20);
-}
+} */
 
 function reset(){
     player = new Player();
@@ -878,8 +899,29 @@ function reset(){
         }, "back1")
     ];
 
+    goblins = [
+        new Pnj({x : 2000, y : 500}),
+        new Pnj({x : 4500, y : 500}),
+        new Pnj({x : 6000, y : 500}),
+        new Pnj({x : 8000, y : 350}),
+        new Pnj({x : 9200, y : 500}),
+        new Pnj({x : 12000, y : 120}),
+        new Pnj({x : 19450, y : 200}),
+        new Pnj({x : 21000, y : 500})
+    ];
+
     fore = new foregroundObject();
     playerProgression = 0;
+}
+function attack(){
+    console.log("attacking");
+    goblins.forEach(pnj => {
+        //     oldContact = contact;
+             if(pnj.position.x - (player.position.x + player.width) <= 100){
+                 pnj.alive = false;
+                 console.log("hit");
+             }
+         })
 }
 
 animation();
@@ -913,6 +955,8 @@ addEventListener('keydown', ({code})=>{
                         player.currentWidth = player.states.run.crop;
                         player.width = player.states.run.width;
                         // player.frames = 0;
+            break;
+        case 'KeyC':    attack();
             break;
         case 'Space':   player.jump();
                         if(player.currentState == player.states.run.right || 
