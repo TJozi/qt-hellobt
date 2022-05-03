@@ -1,3 +1,6 @@
+//---------------------------------------------------------------------------------------
+//         Constants
+//---------------------------------------------------------------------------------------
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 const gravity = 1;
@@ -9,7 +12,8 @@ const foregroundSpeed = 8;
 const blockWidth = 400;
 
 //---------------------------------------------------------------------------------------
-//Images
+//          Images
+//---------------------------------------------------------------------------------------
 //Player
 const idleR = new Image();
 idleR.src = "./img/AlixStandRight.png";
@@ -37,11 +41,10 @@ const foreground = new Image();
 foreground.src = "./img/foreground.png";
 const plateform = new Image();
 plateform.src = "./img/plateform.png";
-
 //---------------------------------------------------------------------------------------
-//Game information
+//          Game information
+//---------------------------------------------------------------------------------------
 let playerProgression = 0;
-//let health = 4;
 
 const keys = {
     right : {
@@ -57,234 +60,8 @@ canvas.width = 1024;
 canvas.height = 576;
 
 //---------------------------------------------------------------------------------------
-//Classes
-class Player {
-    constructor(){
-        this.position = {
-            x : 50,
-            y : 100
-        };
-
-        this.velocity = {
-            x : 0,
-            y : 0
-        };
-
-        this.width = 115;        //change the size of the player
-        this.height = 240;
-        this.Image = idleR;
-        this.frames = 0;
-        this.count  = 0;
-        this.states = {
-            stand: {
-                right : 0,
-                left : 1,
-                crop : 177,
-                width : 115,
-                frames : 59
-            },
-            run: {
-                right : 2,
-                left : 3,
-                crop : 341,
-                width : 220,
-                frames : 33
-            },
-            jump: {
-                right : 4,
-                left : 5,
-                crop : 341,
-                width : 220,        //Retirer 100px de la gauche sur le png
-                frames : 3
-            },
-            hit: {
-                right : 6,
-                left : 7,
-                crop : 351,
-                width : 220,
-                frames : 4
-            }
-        };
-        this.currentState = this.states.stand.right;
-        this.currentWidth = this.states.stand.crop;
-        this.currentFrame = this.states.stand.frames;
-    }
-
-    update(){
-        switch(this.currentState){
-            case this.states.stand.right: this.Image = idleR;
-                break;
-            case this.states.stand.left: this.Image = idleL;
-                break;
-            case this.states.run.right: this.Image = runR;
-                break;
-            case this.states.run.left: this.Image = runL;
-                break;
-            case this.states.jump.right: this.Image = jumpR;
-                break;
-            case this.states.jump.left: this.Image = jumpL;
-                break;
-            case this.states.hit.right: this.Image = attacking;
-                break;
-        }
-        //this.count++;
-        //---------------------------------------------------------------------------------------------------
-        //Tout faire avec la velocity.y plutôt que les touches. Ne garder qu'une frame du sprite?------------
-        //--------------------------------------------------------------------------------------------------
-        if(this.currentState == this.states.jump.right ||
-            this.currentState == this.states.jump.left){
-                if(this.velocity.y < 0){
-                    this.frames = 0;
-                }else if(this.velocity.y >= 0){
-                    this.frames = 3;
-                }
-
-        }else{
-            if(this.currentState == this.states.hit.right && this.frames < this.currentFrame){
-                this.frames++;
-            }else if(this.currentState == this.states.hit.right && this.frames == this.currentFrame){
-                if(this.velocity.y == 0){
-                    this.currentState = this.states.run.right;
-                    this.currentFrame = this.states.run.frames;
-                }else{
-                    this.currentState = this.states.jump.right;
-                    this.currentFrame = this.states.jump.frames;
-                }
-                this.currentWidth = this.states.run.crop;
-                this.width = this.states.run.width;
-
-            }else if (this.currentState != this.states.hit.right){
-                this.frames++;
-
-                if(this.frames > this.currentFrame)
-                    this.frames = 0;
-            }
-        }
-
-        this.position.y += this.velocity.y;
-        this.position.x += this.velocity.x;
-
-        if(this.velocity.y + this.position.y + this.height <= canvas.height)
-            this.velocity.y += gravity;
-
-
-        this.draw();
-    }
-
-    draw(){
-        c.drawImage(
-            this.Image,
-            this.currentWidth * this.frames,
-            0,
-            this.currentWidth,
-            400,
-            this.position.x,
-            this.position.y,
-            this.width,
-            this.height);
-    }
-
-    jump(){
-        //if(this.velocity.y == 0){
-            this.velocity.y += -jumpingSpeed;
-            this.update();
-            //console.log("jumping");
-        //}
-    }
-}
-
-class Pnj {
-    constructor({x, y}){
-        this.position = {
-            x,
-            y
-        };
-        //this.Image = plateform;
-        this.alive = true;
-        this.width = 50;
-        this.height = 90;
-    }
-    draw(){
-        if(this.alive){
-            //c.drawImage(this.Image, this.position.x, this.position.y, blockWidth, this.height);
-            c.fillStyle = 'red';
-            c.fillRect(this.position.x, this.position.y, this.width, this.height);
-        }
-        
-    }
-}
-
-class Block {
-    constructor({x, y}){
-        this.position = {
-            x,
-            y
-        };
-        this.Image = ground;
-        this.width = blockWidth;
-        this.height = 45;
-        
-    }
-    draw(){
-        c.drawImage(this.Image, this.position.x, this.position.y, blockWidth, this.height);
-    }
-}
-class Plateform {
-    constructor({x, y}){
-        this.position = {
-            x,
-            y
-        };
-        this.Image = plateform;
-        this.width = 200;
-        this.height = 45;
-    }
-
-    draw(){
-        c.drawImage(this.Image, this.position.x, this.position.y);
-    }
-}
-
-class foregroundObject {
-    constructor(){
-        this.position = {
-            x : 0,
-            y : 0
-        };
-        this.Image = foreground;
-        this.width = 400;
-        this.height = 45;   
-    }
-
-    draw(){
-        c.drawImage(this.Image, this.position.x, this.position.y);
-    }
-}
-class backgroundObject {
-    constructor({x, y}, objType){
-        this.position = {
-            x,
-            y
-        };
-        objType;
-        switch(objType){
-            case "back" : this.Image = background;
-                break;
-            case "back1" : this.Image = backgroundA;
-                break;
-        }
-        
-        this.width = 400;
-        this.height = 45;
-        
-    }
-    draw(){
-        c.drawImage(this.Image, this.position.x, this.position.y);
-    }
-}
+//                      Game elements
 //---------------------------------------------------------------------------------------
-
-
 let player = new Player();
 let goblins = [
     new Pnj({x : 2000, y : 500}),
@@ -527,7 +304,6 @@ let groundObj = [
     }),
 ];
 
-
 let backgroundObj = [
     new backgroundObject({
         x : 0,
@@ -538,10 +314,11 @@ let backgroundObj = [
         y : 0  
     }, "back1")
 ];
-let fore = new foregroundObject();
 
+let fore = new foregroundObject();
 //---------------------------------------------------------------------------------------
 //Functions
+//---------------------------------------------------------------------------------------
 function animation(){
     requestAnimationFrame(animation);
 
@@ -619,10 +396,6 @@ function animation(){
     //Win                                                                   //End of game
     if(playerProgression >= maxDistance){
         console.log("win");
-        player.currentState = player.states.stand.right;
-        player.currentWidth = player.states.stand.crop;
-        player.currentFrame = player.states.stand.frames;
-        player.width = player.states.stand.width;
         player.velocity.x = 0;
         //alert("YOU WIN, CONGRATULATIONS!");
         //document.location.reload();
@@ -682,11 +455,6 @@ function animation(){
         }
     });
 }
-/* function drawHealth() {
-    c.font = "16px Arial";
-    c.fillStyle = 'black';
-    c.fillText("Health: "+ health, 8, 20);
-} */
 
 function reset(){
     player = new Player();
@@ -957,7 +725,8 @@ function attack(){
 animation();
 
 //---------------------------------------------------------------------------------------
-//Events
+//          Events key listeners
+//---------------------------------------------------------------------------------------
 addEventListener('keydown', ({code})=>{
     //console.log(code);
     switch(code){
@@ -970,10 +739,7 @@ addEventListener('keydown', ({code})=>{
                             player.currentFrame = player.states.jump.frames;
                         }
                         player.currentWidth = player.states.run.crop;
-                        player.width = player.states.run.width;
-                        
-                        //player.frames = 0;
-                      
+                        player.width = player.states.run.width;    
             break;
         case 'KeyD':    keys.right.pressed = true;
                         if(player.velocity.y == 0){
@@ -985,8 +751,6 @@ addEventListener('keydown', ({code})=>{
                         }
                         player.currentWidth = player.states.run.crop;
                         player.width = player.states.run.width;
-                        
-                        // player.frames = 0;
             break;
         case 'KeyC':    player.currentState = player.states.hit.right;
                         player.currentFrame = player.states.hit.frames;
@@ -1007,8 +771,7 @@ addEventListener('keydown', ({code})=>{
                         player.currentWidth = player.states.jump.crop;
                         player.currentFrame = player.states.jump.frames;
                         player.width = player.states.jump.width;
-                        player.frames = 0;
-                        
+                        player.frames = 0;    
             break;
     }
 })
@@ -1029,8 +792,7 @@ addEventListener('keyup', ({code})=>{
                             player.currentWidth = player.states.stand.crop;
                             player.currentFrame = player.states.stand.frames;
                             player.width = player.states.stand.width;
-                        }
-                        
+                        }                
             break;
     }
 })
