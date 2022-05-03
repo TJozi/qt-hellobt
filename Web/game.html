@@ -46,9 +46,20 @@
             }
         </style>
 
-
-        <canvas></canvas>
+        <div id="start_screen" class="screen" style="display:block"></div>
+        <canvas id="canvas" style="display:none"></canvas>
 
         <script type="text/javascript" src="scripts/game.js"></script>
+
+        <script>
+            var ss = document.getElementById("start_screen");
+            var cv = document.getElementById("canvas");
+
+            addEventListener('keydown', ({code})=>{
+                if(code == 'Space'){
+                    cv.style.display = "initial"
+                }
+            })
+        </script>
     </body>
 </html>

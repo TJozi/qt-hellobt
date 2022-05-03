@@ -340,10 +340,9 @@ function animation(){
 
     player.update();
     fore.draw();
-   // drawHealth();
-   console.log("state : " + player.currentState);
+   /* console.log("state : " + player.currentState);
    console.log("frame : " + player.frames);
-   console.log("current frame : " + player.currentFrame);
+   console.log("current frame : " + player.currentFrame); */
 
     //Control
     if(keys.left.pressed && player.position.x >= 50)
