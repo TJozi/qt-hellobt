@@ -23,6 +23,8 @@ const jumpR = new Image();
 jumpR.src = "./img/AlixJumpRight.png";
 const jumpL = new Image();
 jumpL.src = "./img/AlixJumpLeft.png";
+const attacking = new Image();
+attacking.src = "./img/AlixAttack.png";
 
 //Environment
 const ground = new Image();
@@ -94,6 +96,13 @@ class Player {
                 crop : 341,
                 width : 220,        //Retirer 100px de la gauche sur le png
                 frames : 3
+            },
+            hit: {
+                right : 6,
+                left : 7,
+                crop : 351,
+                width : 220,
+                frames : 4
             }
         };
         this.currentState = this.states.stand.right;
@@ -115,6 +124,8 @@ class Player {
                 break;
             case this.states.jump.left: this.Image = jumpL;
                 break;
+            case this.states.hit.right: this.Image = attacking;
+                break;
         }
         //this.count++;
         //---------------------------------------------------------------------------------------------------
@@ -127,15 +138,27 @@ class Player {
                 }else if(this.velocity.y >= 0){
                     this.frames = 3;
                 }
-               /*  if((this.frames < this.currentFrame) && (this.velocity.y < 0)){
-                    this.frames ++;  
-                }else if((this.frame) >= 0 && (this.velocity.y >= 0))
-                    this.frames--; */
-        }else{
-            this.frames++;
-            if(this.frames > this.currentFrame)
-                this.frames = 0;
 
+        }else{
+            if(this.currentState == this.states.hit.right && this.frames < this.currentFrame){
+                this.frames++;
+            }else if(this.currentState == this.states.hit.right && this.frames == this.currentFrame){
+                if(this.velocity.y == 0){
+                    this.currentState = this.states.run.right;
+                    this.currentFrame = this.states.run.frames;
+                }else{
+                    this.currentState = this.states.jump.right;
+                    this.currentFrame = this.states.jump.frames;
+                }
+                this.currentWidth = this.states.run.crop;
+                this.width = this.states.run.width;
+
+            }else if (this.currentState != this.states.hit.right){
+                this.frames++;
+
+                if(this.frames > this.currentFrame)
+                    this.frames = 0;
+            }
         }
 
         this.position.y += this.velocity.y;
@@ -541,6 +564,9 @@ function animation(){
     player.update();
     fore.draw();
    // drawHealth();
+   console.log("state : " + player.currentState);
+   console.log("frame : " + player.frames);
+   console.log("current frame : " + player.currentFrame);
 
     //Control
     if(keys.left.pressed && player.position.x >= 50)
@@ -586,13 +612,18 @@ function animation(){
 
             fore.position.x += foregroundSpeed;
         }
-        console.log(playerProgression);
+       // console.log(playerProgression);
     }
     
 
     //Win                                                                   //End of game
     if(playerProgression >= maxDistance){
         console.log("win");
+        player.currentState = player.states.stand.right;
+        player.currentWidth = player.states.stand.crop;
+        player.currentFrame = player.states.stand.frames;
+        player.width = player.states.stand.width;
+        player.velocity.x = 0;
         //alert("YOU WIN, CONGRATULATIONS!");
         //document.location.reload();
     }
@@ -916,8 +947,7 @@ function reset(){
 function attack(){
     console.log("attacking");
     goblins.forEach(pnj => {
-        //     oldContact = contact;
-             if(pnj.position.x - (player.position.x + player.width) <= 100){
+             if(pnj.position.x - (player.position.x + player.width) <= 50){
                  pnj.alive = false;
                  console.log("hit");
              }
@@ -941,6 +971,7 @@ addEventListener('keydown', ({code})=>{
                         }
                         player.currentWidth = player.states.run.crop;
                         player.width = player.states.run.width;
+                        
                         //player.frames = 0;
                       
             break;
@@ -954,14 +985,21 @@ addEventListener('keydown', ({code})=>{
                         }
                         player.currentWidth = player.states.run.crop;
                         player.width = player.states.run.width;
+                        
                         // player.frames = 0;
             break;
-        case 'KeyC':    attack();
+        case 'KeyC':    player.currentState = player.states.hit.right;
+                        player.currentFrame = player.states.hit.frames;
+                        player.currentWidth = player.states.hit.crop;
+                        player.width = player.states.hit.width;
+                        player.frames = 0;
+                        attack();
             break;
         case 'Space':   player.jump();
                         if(player.currentState == player.states.run.right || 
-                               player.currentState == player.states.stand.right ||
-                               player.currentState == player.states.jump.right)
+                            player.currentState == player.states.stand.right ||
+                            player.currentState == player.states.jump.right ||
+                            player.currentState == player.states.hit.right)
                             player.currentState = player.states.jump.right;
                         else
                             player.currentState = player.states.jump.left;
@@ -970,6 +1008,7 @@ addEventListener('keydown', ({code})=>{
                         player.currentFrame = player.states.jump.frames;
                         player.width = player.states.jump.width;
                         player.frames = 0;
+                        
             break;
     }
 })
@@ -991,6 +1030,7 @@ addEventListener('keyup', ({code})=>{
                             player.currentFrame = player.states.stand.frames;
                             player.width = player.states.stand.width;
                         }
+                        
             break;
     }
 })
