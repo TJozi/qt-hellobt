@@ -29,6 +29,8 @@ const jumpL = new Image();
 jumpL.src = "./img/AlixJumpLeft.png";
 const attacking = new Image();
 attacking.src = "./img/AlixAttack.png";
+const gbln = new Image();
+gbln.src = "./img/goblin.png";
 
 //Environment
 const ground = new Image();
@@ -64,14 +66,14 @@ canvas.height = 576;
 //---------------------------------------------------------------------------------------
 let player = new Player();
 let goblins = [
-    new Pnj({x : 2000, y : 500}),
-    new Pnj({x : 4500, y : 500}),
-    new Pnj({x : 6000, y : 500}),
-    new Pnj({x : 8000, y : 350}),
-    new Pnj({x : 9200, y : 500}),
-    new Pnj({x : 12000, y : 120}),
-    new Pnj({x : 19450, y : 200}),
-    new Pnj({x : 21000, y : 500})
+    new Pnj({x : 2000, y : 440}),
+    new Pnj({x : 4500, y : 440}),
+    new Pnj({x : 6000, y : 440}),
+    new Pnj({x : 8000, y : 310}),
+    new Pnj({x : 9200, y : 440}),
+    new Pnj({x : 12000, y : 90}),
+    new Pnj({x : 19450, y : 160}),
+    new Pnj({x : 21000, y : 440})
 ];
 let groundObj = [
     new Block({
