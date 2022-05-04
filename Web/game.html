@@ -8,8 +8,7 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
         
-        <script type="text/javascript" src="scripts/func.js"></script>
-        <script type="text/javascript" src="scripts/connect.js"></script>
+
         <script  src="scripts/pnjClass.js"></script>
         <script  src="scripts/blockClass.js"></script>
         <script  src="scripts/plateformClass.js"></script>
@@ -46,10 +45,14 @@
             }
         </style>
 
-        <div id="start_screen" class="screen" style="display:block"></div>
+        <div id="start_screen" class="screen" style="display:block">
+            <img src="img/startscreen.png" width="1024" height="572">
+        </div>
         <canvas id="canvas" style="display:none"></canvas>
 
         <script type="text/javascript" src="scripts/game.js"></script>
+        <script type="text/javascript" src="scripts/func.js"></script>
+        <script type="text/javascript" src="scripts/connect.js"></script>
 
         <script>
             var ss = document.getElementById("start_screen");
@@ -57,7 +60,9 @@
 
             addEventListener('keydown', ({code})=>{
                 if(code == 'Space'){
-                    cv.style.display = "initial"
+                    cv.style.display = "initial";
+                    ss.style.display = "none";
+                    setLeds();
                 }
             })
         </script>

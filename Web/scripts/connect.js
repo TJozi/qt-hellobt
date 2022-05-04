@@ -12,8 +12,9 @@ client.onMessageArrived = function (message) {
     console.log("Got message: topic=" + message.destinationName + ', payload=' +
         message.payloadString);
         
-    processMessage(message);
+    //processMessage(message);
     //processMessage(message.destinationName, message.payloadString);
+    thingyButtonPressed(message);
 }
 
 client.connect({

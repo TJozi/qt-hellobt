@@ -38,3 +38,16 @@ function btnPressed()
         blue: 255
     }));
 }
+
+function setLeds(){
+    client.send('sdi09/D5:2F:7E:30:10:5A/led', JSON.stringify({
+        red: 0,
+        green: 0,
+        blue: 255
+    }));
+    client.send('sdi09/FD:17:0C:19:6A:F7/led', JSON.stringify({
+        red: 255,
+        green: 0,
+        blue: 0
+    }));
+}

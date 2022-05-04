@@ -119,12 +119,13 @@ void thingyController::onButtonChanged(bool value){
     if(value){
         client.publish(QMqttTopicName(username + "/" + t->address().toString() + "/button"),"true");    //Btn pressed
         qDebug() << "Turning on leds";
-        for(auto d : connectedDevices) {
+        //Commented for web game
+        /*for(auto d : connectedDevices) {
             if(d == t){
                 d->setLedColor(0,255,0);        //Set led to green color
             }else
                 d->setLedColor(255, 0, 0);      //Set led to red color
-        }
+        }*/
     }else
         client.publish(QMqttTopicName(username + "/" + t->address().toString() + "/button"),"false");   //Btn released
 }

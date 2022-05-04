@@ -5,7 +5,7 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 const gravity = 1;
 const maxDistance = 22500;
-const walkingSpeed = 8;
+const walkingSpeed = 7;
 const jumpingSpeed = 20;
 const backgroundSpeed = 5;
 const foregroundSpeed = 8;
@@ -56,6 +56,8 @@ const keys = {
         pressed : false
     }
 }
+
+let gameStarted = false;
 
 //Game window
 canvas.width = 1024;
@@ -398,6 +400,7 @@ function animation(){
     if(playerProgression >= maxDistance){
         console.log("win");
         player.velocity.x = 0;
+        keys.right.pressed = false;
         //alert("YOU WIN, CONGRATULATIONS!");
         //document.location.reload();
     }
@@ -700,18 +703,20 @@ function reset(){
     ];
 
     goblins = [
-        new Pnj({x : 2000, y : 500}),
-        new Pnj({x : 4500, y : 500}),
-        new Pnj({x : 6000, y : 500}),
-        new Pnj({x : 8000, y : 350}),
-        new Pnj({x : 9200, y : 500}),
-        new Pnj({x : 12000, y : 120}),
-        new Pnj({x : 19450, y : 200}),
-        new Pnj({x : 21000, y : 500})
+        new Pnj({x : 2000, y : 440}),
+        new Pnj({x : 4500, y : 440}),
+        new Pnj({x : 6000, y : 440}),
+        new Pnj({x : 8000, y : 310}),
+        new Pnj({x : 9200, y : 440}),
+        new Pnj({x : 12000, y : 90}),
+        new Pnj({x : 19450, y : 160}),
+        new Pnj({x : 21000, y : 440})
     ];
 
     fore = new foregroundObject();
     playerProgression = 0;
+    gameStarted = false;
+    keys.right.pressed = false;
 }
 function attack(){
     console.log("attacking");
@@ -721,6 +726,59 @@ function attack(){
                  console.log("hit");
              }
          })
+}
+
+function thingyButtonPressed(message){
+    if(gameStarted == false && (message.destinationName == "sdi09/FD:17:0C:19:6A:F7/button"
+            || message.destinationName == "sdi09/D5:2F:7E:30:10:5A/button")){
+        console.log("Starting");
+        keys.right.pressed = true;
+        player.velocity.x = walkingSpeed;
+        gameStarted = true;
+
+        player.currentState = player.states.run.right;
+        player.currentFrame = player.states.run.frames;
+        player.currentWidth = player.states.run.crop;
+        player.width = player.states.run.width;
+    }
+
+
+    if(message.destinationName == "sdi09/FD:17:0C:19:6A:F7/button" && message.payloadString == "true"){
+        console.log("Red button pressed");
+
+        player.currentState = player.states.hit.right;
+        player.currentFrame = player.states.hit.frames;
+        player.currentWidth = player.states.hit.crop;
+        player.width = player.states.hit.width;
+        player.frames = 0;
+        attack();
+
+    }else  if(message.destinationName == "sdi09/D5:2F:7E:30:10:5A/button" && message.payloadString == "true"){
+        console.log("Blue button pressed");
+
+        player.jump();
+
+        if(player.currentState == player.states.run.right || 
+            player.currentState == player.states.stand.right ||
+            player.currentState == player.states.jump.right ||
+            player.currentState == player.states.hit.right)
+            player.currentState = player.states.jump.right;
+        else
+            player.currentState = player.states.jump.left;
+
+        player.currentWidth = player.states.jump.crop;
+        player.currentFrame = player.states.jump.frames;
+        player.width = player.states.jump.width;
+        player.frames = 0;    
+
+    }else if(message.destinationName == "sdi09/FD:17:0C:19:6A:F7/button" && message.payloadString == "false"){
+        console.log("Red button released");
+
+    }else  if(message.destinationName == "sdi09/D5:2F:7E:30:10:5A/button" && message.payloadString == "false"){
+        console.log("Blue button released");
+
+    }
+
 }
 
 animation();
