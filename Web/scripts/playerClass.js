@@ -34,7 +34,7 @@ class Player {
                 right : 4,
                 left : 5,
                 crop : 341,
-                width : 220,        //Retirer 100px de la gauche sur le png
+                width : 220,
                 frames : 3
             },
             hit: {
@@ -45,12 +45,14 @@ class Player {
                 frames : 4
             }
         };
+        //Initial state
         this.currentState = this.states.stand.right;
         this.currentWidth = this.states.stand.crop;
         this.currentFrame = this.states.stand.frames;
     }
 
     update(){
+        //Updates the image to display according to the current state
         switch(this.currentState){
             case this.states.stand.right: this.Image = idleR;
                 break;
@@ -67,10 +69,8 @@ class Player {
             case this.states.hit.right: this.Image = attacking;
                 break;
         }
-        //this.count++;
-        //---------------------------------------------------------------------------------------------------
-        //Tout faire avec la velocity.y plutôt que les touches. Ne garder qu'une frame du sprite?------------
-        //--------------------------------------------------------------------------------------------------
+
+        //Changes sprite when going up or down
         if(this.currentState == this.states.jump.right ||
             this.currentState == this.states.jump.left){
                 if(this.velocity.y < 0){
@@ -128,7 +128,6 @@ class Player {
         if(this.velocity.y == 0){
             this.velocity.y += -jumpingSpeed;
             this.update();
-            //console.log("jumping");
         }
     }
 }

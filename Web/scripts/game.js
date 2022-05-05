@@ -6,7 +6,7 @@ const c = canvas.getContext('2d');
 const gravity = 1;
 const maxDistance = 22500;
 const walkingSpeed = 7;
-const jumpingSpeed = 20;
+const jumpingSpeed = 23;
 const backgroundSpeed = 5;
 const foregroundSpeed = 8;
 const blockWidth = 400;
@@ -324,7 +324,7 @@ let fore = new foregroundObject();
 //Functions
 //---------------------------------------------------------------------------------------
 function animation(){
-    requestAnimationFrame(animation);
+    requestAnimationFrame(animation);   //Tells the browser to call animation
 
     //Display
     c.fillStyle = 'grey'
@@ -344,19 +344,16 @@ function animation(){
 
     player.update();
     fore.draw();
-   /* console.log("state : " + player.currentState);
-   console.log("frame : " + player.frames);
-   console.log("current frame : " + player.currentFrame); */
 
     //Control
-    if(keys.left.pressed && player.position.x >= 50)
+    if(keys.left.pressed && player.position.x >= 50)                //Moving left
         player.velocity.x = -walkingSpeed;
-    else if(keys.right.pressed && player.position.x < 400)
+    else if(keys.right.pressed && player.position.x < 400)          //Moving right
         player.velocity.x = walkingSpeed;
     else{
-        player.velocity.x = 0;
+        player.velocity.x = 0;                                      //Moving with parallax
 
-        if(keys.right.pressed && playerProgression < maxDistance){                                            //Movement to the right
+        if(keys.right.pressed && playerProgression < maxDistance){          //Moving objects to the left
             playerProgression += walkingSpeed;
 
             groundObj.forEach(block => {
@@ -374,7 +371,7 @@ function animation(){
             fore.position.x -= foregroundSpeed;
         }
 
-        if(keys.left.pressed && playerProgression > 0){                    //Movement to the left
+        if(keys.left.pressed && playerProgression > 0){                    //Moving objects to the right
             playerProgression += -walkingSpeed;
 
             groundObj.forEach(block => {
@@ -395,31 +392,29 @@ function animation(){
        // console.log(playerProgression);
     }
     
-
-    //Win                                                                   //End of game
+    //End of game
+    //Win - Max distance reached
     if(playerProgression >= maxDistance){
-        console.log("win");
+        //console.log("win");
         player.velocity.x = 0;
         keys.right.pressed = false;
         //alert("YOU WIN, CONGRATULATIONS!");
         //document.location.reload();
     }
-    //Lose
+    //Lose - Fell into a hole
     if(player.position.y > canvas.height){
-        console.log("lose");
+        //console.log("lose");
         reset();
     }
 
-    //Losing health--------------dying
+    //Lose - Killed by a goblin
     goblins.forEach(pnj => {
-   //     oldContact = contact;
         if(pnj.alive){                  //Is it alive?
             if((player.position.x + player.width/2) >= pnj.position.x && (player.position.x + player.width/2) < (pnj.position.x + pnj.width) &&
             (player.position.y + player.height) >= pnj.position.y){     //Is it in contact with the player?
                 reset();
             }
         }
-        
     })
 
     //Ground collision
@@ -459,7 +454,7 @@ function animation(){
         }
     });
 }
-
+//Restarts the game when called
 function reset(){
     player = new Player();
     health = 4;
@@ -718,20 +713,24 @@ function reset(){
     gameStarted = false;
     keys.right.pressed = false;
 }
+//Tests if an ennemy is in reach when doing an attack
 function attack(){
     console.log("attacking");
     goblins.forEach(pnj => {
              if(pnj.position.x - (player.position.x + player.width) <= 50){
                  pnj.alive = false;
-                 console.log("hit");
+                 //console.log("hit");
              }
          })
 }
 
+//Called when the state of a thingy has changed
 function thingyButtonPressed(message){
+    //Starts auto-running to the right when using the thingies
     if(gameStarted == false && (message.destinationName == "sdi09/FD:17:0C:19:6A:F7/button"
             || message.destinationName == "sdi09/D5:2F:7E:30:10:5A/button")){
-        console.log("Starting");
+
+        //console.log("Starting");
         keys.right.pressed = true;
         player.velocity.x = walkingSpeed;
         gameStarted = true;
@@ -742,9 +741,9 @@ function thingyButtonPressed(message){
         player.width = player.states.run.width;
     }
 
-
+    //Red thingy, used to attack, is pressed
     if(message.destinationName == "sdi09/FD:17:0C:19:6A:F7/button" && message.payloadString == "true"){
-        console.log("Red button pressed");
+        //console.log("Red button pressed");
 
         player.currentState = player.states.hit.right;
         player.currentFrame = player.states.hit.frames;
@@ -753,8 +752,9 @@ function thingyButtonPressed(message){
         player.frames = 0;
         attack();
 
+    //Blue thingy, used to jump, is pressed
     }else  if(message.destinationName == "sdi09/D5:2F:7E:30:10:5A/button" && message.payloadString == "true"){
-        console.log("Blue button pressed");
+        //console.log("Blue button pressed");
 
         player.jump();
 
@@ -771,11 +771,12 @@ function thingyButtonPressed(message){
         player.width = player.states.jump.width;
         player.frames = 0;    
 
+    //Not used
     }else if(message.destinationName == "sdi09/FD:17:0C:19:6A:F7/button" && message.payloadString == "false"){
-        console.log("Red button released");
+        //console.log("Red button released");
 
     }else  if(message.destinationName == "sdi09/D5:2F:7E:30:10:5A/button" && message.payloadString == "false"){
-        console.log("Blue button released");
+        //console.log("Blue button released");
 
     }
 
@@ -789,7 +790,7 @@ animation();
 addEventListener('keydown', ({code})=>{
     //console.log(code);
     switch(code){
-        case 'KeyA':    keys.left.pressed = true;
+        case 'KeyA':    keys.left.pressed = true;                               //Move left
                         if(player.velocity.y == 0){
                             player.currentState = player.states.run.left;
                             player.currentFrame = player.states.run.frames;
@@ -800,7 +801,7 @@ addEventListener('keydown', ({code})=>{
                         player.currentWidth = player.states.run.crop;
                         player.width = player.states.run.width;    
             break;
-        case 'KeyD':    keys.right.pressed = true;
+        case 'KeyD':    keys.right.pressed = true;                              //Move right
                         if(player.velocity.y == 0){
                             player.currentState = player.states.run.right;
                             player.currentFrame = player.states.run.frames;
@@ -811,14 +812,14 @@ addEventListener('keydown', ({code})=>{
                         player.currentWidth = player.states.run.crop;
                         player.width = player.states.run.width;
             break;
-        case 'KeyC':    player.currentState = player.states.hit.right;
+        case 'KeyC':    player.currentState = player.states.hit.right;          //Attack
                         player.currentFrame = player.states.hit.frames;
                         player.currentWidth = player.states.hit.crop;
                         player.width = player.states.hit.width;
                         player.frames = 0;
                         attack();
             break;
-        case 'Space':   player.jump();
+        case 'Space':   player.jump();                                          //Jump
                         if(player.currentState == player.states.run.right || 
                             player.currentState == player.states.stand.right ||
                             player.currentState == player.states.jump.right ||
@@ -837,7 +838,7 @@ addEventListener('keydown', ({code})=>{
 
 addEventListener('keyup', ({code})=>{
     switch(code){
-        case 'KeyA':    keys.left.pressed = false;
+        case 'KeyA':    keys.left.pressed = false;                          //Stops walking
                         if(player.velocity.y == 0){
                             player.currentState = player.states.stand.left;
                             player.currentWidth = player.states.stand.crop;

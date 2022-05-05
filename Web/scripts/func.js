@@ -2,14 +2,12 @@ var client;
 
 function switchColor(col)
 {
-    var color;
     var square = document.getElementById("sqr");
 
-    square.style.backgroundColor = col;
-    
+    square.style.backgroundColor = col;   
 }
 
-function processMessage(message)
+/* function processMessage(message)
 {
 
     //Buttons processing
@@ -23,22 +21,24 @@ function processMessage(message)
 
     if(message.payloadString == "false")
         switchColor('white');
-}
+} */
 
+//Gets the client connected
 function setClient(clt)
 {
     client = clt;
 }
 
-function btnPressed()
+/* function btnPressed()
 {
     client.send('sdi09/D5:2F:7E:30:10:5A/led', JSON.stringify({
         red: 0,
         green: 0,
         blue: 255
     }));
-}
+} */
 
+//Sets the right colors for thingies
 function setLeds(){
     client.send('sdi09/D5:2F:7E:30:10:5A/led', JSON.stringify({
         red: 0,
